@@ -9,5 +9,5 @@ public class Food {
         this.name = name;
         this.pictureFileName = pictureFileName;
     }
-    
+
 }
