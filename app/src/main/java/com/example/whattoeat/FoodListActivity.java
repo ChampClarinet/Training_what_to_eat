@@ -34,11 +34,12 @@ public class FoodListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                FoodMenu menu = FoodMenu.getInstance(FoodListActivity.this);
-                Food selected = menu.getFoodList().get(position);
+                //FoodMenu menu = FoodMenu.getInstance(FoodListActivity.this);
+                //Food selected = menu.getFoodList().get(position);
 
                 Intent intent = new Intent(FoodListActivity.this, FoodDetailActivity.class);
-                intent.putExtra("food", selected);
+                intent.putExtra("position", position);
+                //intent.putExtra("food", selected);
                 startActivity(intent);
             }
         });
