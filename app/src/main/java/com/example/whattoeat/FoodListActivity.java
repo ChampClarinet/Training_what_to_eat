@@ -26,8 +26,6 @@ public class FoodListActivity extends AppCompatActivity {
 
         foodListView = (ListView) findViewById(R.id.food_list_view);
 
-        menu = FoodMenu.getInstance(this);
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,6 +38,10 @@ public class FoodListActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
+        menu = FoodMenu.getInstance(this);
+
+        menu.loadFromDatabase();
 
         FoodListAdapter adapter = new FoodListAdapter(this, R.layout.list_item, menu.getFoodList());
         foodListView.setAdapter(adapter);

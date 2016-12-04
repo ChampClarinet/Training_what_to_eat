@@ -95,6 +95,7 @@ public class AddFoodActivity extends AppCompatActivity implements ImageChooserLi
                 cv.put(databaseHelper.COL_PICTURE, mPictucrePath);
 
                 if (mDB.insert(databaseHelper.TABLE_NAME, null, cv) > 0) { // returns the row ID of the newly inserted row, or -1 if an error occurred
+                    Toast.makeText(AddFoodActivity.this, "Food Added.", Toast.LENGTH_SHORT).show();
                     finish();
                 }else Toast.makeText(AddFoodActivity.this, "Add food failed.", Toast.LENGTH_SHORT).show();
 
