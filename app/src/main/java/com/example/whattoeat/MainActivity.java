@@ -8,6 +8,9 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -15,6 +18,7 @@ import android.widget.TextView;
 
 import com.example.whattoeat.Model.Food;
 import com.example.whattoeat.Model.FoodMenu;
+import com.example.whattoeat.Utilities.Utils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,21 +27,20 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
-
-    private Random mRandom = new Random();
+    private FoodMenu foodMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        foodMenu = foodMenu.getInstance(this);
+        foodMenu.loadFromDatabase();
+
         final Button randomButton = (Button) findViewById(R.id.random_button);
         randomButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                FoodMenu foodMenu = FoodMenu.getInstance(MainActivity.this);
-                foodMenu.loadFromDatabase();
 
                 Food randomFood = foodMenu.getRandomFood();
 
@@ -48,25 +51,32 @@ public class MainActivity extends AppCompatActivity {
                 TextView foodName = (TextView) layout.findViewById(R.id.food_name_text_view);
 
                 foodName.setText(randomFood.name);
-                Drawable drawable = getDrawableFromAssets(randomFood.pictureFileName);
+                Drawable drawable = Utils.getDrawableFromAssets(MainActivity.this, randomFood.pictureFileName);
                 foodImage.setImageDrawable(drawable);
 
                 alert.setView(layout);
                 alert.show();
+
             }
         });
     }
 
-    private Drawable getDrawableFromAssets(String pictureFileName) {
-        AssetManager am = getAssets();
-        try {
-            InputStream stream = am.open(pictureFileName);
-            Drawable drawable = Drawable.createFromStream(stream, null);
-            return drawable;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int itemID = item.getItemId();
+
+        if(itemID == R.id.action_show_list){
+            startActivity(new Intent(this, FoodListActivity.class));
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 }
