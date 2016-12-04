@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class databaseHelper extends SQLiteOpenHelper{
 
+    private static final String TAG = databaseHelper.class.getSimpleName();
+
     private static final String DATABASENAME = "WHAT_TO_EAT";
     private static final int DATABASEVERSION = 1;
     public static final String TABLE_NAME = "FOOD";

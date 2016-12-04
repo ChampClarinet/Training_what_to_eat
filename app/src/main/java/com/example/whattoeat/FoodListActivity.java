@@ -7,15 +7,19 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.whattoeat.Adapters.FoodListAdapter;
+import com.example.whattoeat.Model.Food;
 import com.example.whattoeat.Model.FoodMenu;
 
 public class FoodListActivity extends AppCompatActivity {
 
-    ListView foodListView;
-    FoodMenu menu;
+    private static final String TAG = FoodListActivity.class.getSimpleName();
+
+    private ListView foodListView;
+    private FoodMenu menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +29,19 @@ public class FoodListActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         foodListView = (ListView) findViewById(R.id.food_list_view);
+
+        foodListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                FoodMenu menu = FoodMenu.getInstance(FoodListActivity.this);
+                Food selected = menu.getFoodList().get(position);
+
+                Intent intent = new Intent(FoodListActivity.this, FoodDetailActivity.class);
+                intent.putExtra("food", selected);
+                startActivity(intent);
+            }
+        });
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

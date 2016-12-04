@@ -1,6 +1,8 @@
 package com.example.whattoeat.Model;
 
-public class Food {
+import java.io.Serializable;
+
+public class Food implements Serializable{
 
     public final String name;
     public final String pictureFileName;

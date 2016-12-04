@@ -11,6 +11,8 @@ import java.io.InputStream;
 
 public class Utils {
 
+    private static final String TAG = Utils.class.getSimpleName();
+
     public static Drawable getDrawableFromAssets(Context context, String pictureFileName) {
         AssetManager am = context.getAssets();
         try {

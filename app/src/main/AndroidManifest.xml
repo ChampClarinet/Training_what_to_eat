@@ -21,9 +21,10 @@
             android:name=".FoodListActivity"
             android:label="@string/title_activity_food_list"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".AddFoodActivity"
-            android:label="@string/add_food"
-            ></activity>
+        <activity
+            android:name=".AddFoodActivity"
+            android:label="@string/add_food" />
+        <activity android:name=".FoodDetailActivity"></activity>
     </application>
 
 </manifest>

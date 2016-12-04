@@ -17,6 +17,8 @@ import java.util.ArrayList;
 
 public class FoodListAdapter extends ArrayAdapter<Food>{
 
+    private static final String TAG = FoodListAdapter.class.getSimpleName();
+
     private Context context;
     private int layoutResourcesID;
     private ArrayList<Food> foodList;
