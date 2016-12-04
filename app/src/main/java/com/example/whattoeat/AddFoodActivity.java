@@ -1,7 +1,9 @@
 package com.example.whattoeat;
 
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -12,8 +14,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.whattoeat.DB.databaseHelper;
 import com.kbeanie.imagechooser.api.ChooserType;
 import com.kbeanie.imagechooser.api.ChosenImage;
 import com.kbeanie.imagechooser.api.ChosenImages;
@@ -29,6 +33,11 @@ public class AddFoodActivity extends AppCompatActivity implements ImageChooserLi
     private ImageView mFoodImageView;
     private Button mAddButton;
 
+    private String mPictucrePath;
+
+    private databaseHelper mHelper;
+    private SQLiteDatabase mDB;
+
     private ImageChooserManager mImageChooserManager;
 
     @Override
@@ -39,6 +48,9 @@ public class AddFoodActivity extends AppCompatActivity implements ImageChooserLi
         mFoodNameEditText = (EditText) findViewById(R.id.food_name_edit_text);
         mFoodImageView = (ImageView) findViewById(R.id.food_image_view);
         mAddButton = (Button) findViewById(R.id.add_button);
+
+        mHelper = new databaseHelper(this);
+        mDB = mHelper.getWritableDatabase();
 
         mFoodImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,6 +74,41 @@ public class AddFoodActivity extends AppCompatActivity implements ImageChooserLi
                         .show();
             }
         });
+
+        mAddButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String foodName = mFoodNameEditText.getText().toString();
+
+                if (isFoodNameEditTextEmpty()) {
+                    Toast.makeText(AddFoodActivity.this, "Please type the food name.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (isPicturePathEmpty()) {
+                    Toast.makeText(AddFoodActivity.this, "Please select the food picture.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                ContentValues cv = new ContentValues();
+                cv.put(databaseHelper.COL_NAME, foodName);
+                cv.put(databaseHelper.COL_PICTURE, mPictucrePath);
+
+                if (mDB.insert(databaseHelper.TABLE_NAME, null, cv) > 0) { // returns the row ID of the newly inserted row, or -1 if an error occurred
+                    finish();
+                }else Toast.makeText(AddFoodActivity.this, "Add food failed.", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+    }
+
+    private boolean isPicturePathEmpty(){
+        return mPictucrePath == null;
+    }
+
+    private boolean isFoodNameEditTextEmpty(){
+        return mFoodNameEditText.getText().toString().length() == 0;
     }
 
     private void chooseImage() {
@@ -123,14 +170,14 @@ public class AddFoodActivity extends AppCompatActivity implements ImageChooserLi
                         if (image != null) {
                             //mChosenImage = image;
 
-                            String filePathOriginal = image.getFilePathOriginal();
+                            mPictucrePath = image.getFilePathOriginal();
                             //Log.i(TAG, "-----");
                             //Log.i(TAG, "Image path: " + filePathOriginal);
                             //Log.i(TAG, "Image thumbnail path: " + image.getFileThumbnail());
                             //Log.i(TAG, "Image small thumbnail path: " + image.getFileThumbnailSmall());
 
                             Glide.with(AddFoodActivity.this)
-                                    .load(filePathOriginal)
+                                    .load(mPictucrePath)
                                     .into(mFoodImageView);
                         } else {
                             //mChosenImage = null;

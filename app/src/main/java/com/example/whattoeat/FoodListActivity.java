@@ -14,6 +14,9 @@ import com.example.whattoeat.Model.FoodMenu;
 
 public class FoodListActivity extends AppCompatActivity {
 
+    ListView foodListView;
+    FoodMenu menu;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,10 +24,9 @@ public class FoodListActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        ListView foodListView = (ListView) findViewById(R.id.food_list_view);
+        foodListView = (ListView) findViewById(R.id.food_list_view);
 
-        FoodListAdapter adapter = new FoodListAdapter(this, R.layout.list_item, FoodMenu.getInstance(this).getFoodList());
-        foodListView.setAdapter(adapter);
+        menu = FoodMenu.getInstance(this);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -33,6 +35,15 @@ public class FoodListActivity extends AppCompatActivity {
                 startActivity(new Intent(FoodListActivity.this, AddFoodActivity.class));
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        FoodListAdapter adapter = new FoodListAdapter(this, R.layout.list_item, menu.getFoodList());
+        foodListView.setAdapter(adapter);
+
     }
 
 }
