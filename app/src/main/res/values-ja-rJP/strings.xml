@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">食べ物をどっちがいい？</string>
+    <string name="add_food">食べ物を追加</string>
+    <string name="title_activity_food_list">食べ物</string>
+    <string name="hint_add_food">食べ物ラベル</string>
+    <string name="btn_add">追加する</string>
+    <string name="btn_random">どっちがいい？</string>
+    <string name="delete">削除</string>
+    <string name="no">いいえ</string>
+    <string name="yes">はい</string>
+    <string name="delete_confirm_title">削除を確認</string>
+    <string name="delete_confirm">削除してもよろしいですか？</string>
+    <string name="main_activity_text_label">写真をタブ</string>
+</resources>

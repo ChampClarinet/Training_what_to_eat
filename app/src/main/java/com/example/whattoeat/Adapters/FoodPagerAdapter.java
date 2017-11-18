@@ -23,7 +23,7 @@ public class FoodPagerAdapter extends FragmentPagerAdapter{
     public Fragment getItem(int position) { // new Fragment and return to ViewPager
         FoodMenu menu = FoodMenu.getInstance(context);
         Food item = menu.getFoodList().get(position);
-        FoodDetailFragment fragment = FoodDetailFragment.newInstance(item.name, item.pictureFileName);
+        FoodDetailFragment fragment = FoodDetailFragment.newInstance(item);
         return fragment;
     }
 

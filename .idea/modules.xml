@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/WhatToEat-CP-SU-2559-Live-master.iml" filepath="$PROJECT_DIR$/WhatToEat-CP-SU-2559-Live-master.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Training_what_to_eat.iml" filepath="$PROJECT_DIR$/Training_what_to_eat.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

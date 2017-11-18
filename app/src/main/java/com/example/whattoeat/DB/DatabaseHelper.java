@@ -5,9 +5,9 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class databaseHelper extends SQLiteOpenHelper{
+public class DatabaseHelper extends SQLiteOpenHelper{
 
-    private static final String TAG = databaseHelper.class.getSimpleName();
+    private static final String TAG = DatabaseHelper.class.getSimpleName();
 
     private static final String DATABASENAME = "WHAT_TO_EAT";
     private static final int DATABASEVERSION = 1;
@@ -22,7 +22,7 @@ public class databaseHelper extends SQLiteOpenHelper{
             COL_PICTURE + " TEXT" +
             ")";
 
-    public databaseHelper(Context context) {
+    public DatabaseHelper(Context context) {
         super(context, DATABASENAME, null, DATABASEVERSION);
     }
 

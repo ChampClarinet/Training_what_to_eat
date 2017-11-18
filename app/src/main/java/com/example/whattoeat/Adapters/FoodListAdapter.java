@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.whattoeat.Model.Food;
-import com.example.whattoeat.Model.FoodMenu;
 import com.example.whattoeat.R;
 import com.example.whattoeat.Utilities.Utils;
 
@@ -37,8 +36,8 @@ public class FoodListAdapter extends ArrayAdapter<Food>{
     public View getView(int position, View convertView, ViewGroup parent) {
 
         View itemLayout = View.inflate(context, R.layout.list_item, null);
-        ImageView foodImageView = (ImageView) itemLayout.findViewById(R.id.food_image_view);
-        TextView foodTextView = (TextView) itemLayout.findViewById(R.id.food_name_text_view);
+        ImageView foodImageView = itemLayout.findViewById(R.id.food_image_view);
+        TextView foodTextView = itemLayout.findViewById(R.id.food_name_text_view);
 
         Food food = foodList.get(position);
         foodTextView.setText(food.name);

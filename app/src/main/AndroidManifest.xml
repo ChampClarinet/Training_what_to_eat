@@ -10,7 +10,10 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity
+            android:name="com.example.whattoeat.SplashActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,13 +21,22 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".FoodListActivity"
             android:label="@string/title_activity_food_list"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".AddFoodActivity"
-            android:label="@string/add_food" />
-        <activity android:name=".FoodDetailActivity"></activity>
+            android:label="@string/add_food"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".FoodDetailActivity"
+            android:label="@string/title_activity_food_list"
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>

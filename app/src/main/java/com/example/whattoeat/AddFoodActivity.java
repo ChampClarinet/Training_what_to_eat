@@ -17,7 +17,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.whattoeat.DB.databaseHelper;
+import com.example.whattoeat.DB.DatabaseHelper;
 import com.kbeanie.imagechooser.api.ChooserType;
 import com.kbeanie.imagechooser.api.ChosenImage;
 import com.kbeanie.imagechooser.api.ChosenImages;
@@ -35,7 +35,7 @@ public class AddFoodActivity extends AppCompatActivity implements ImageChooserLi
 
     private String mPictucrePath;
 
-    private databaseHelper mHelper;
+    private DatabaseHelper mHelper;
     private SQLiteDatabase mDB;
 
     private ImageChooserManager mImageChooserManager;
@@ -45,11 +45,11 @@ public class AddFoodActivity extends AppCompatActivity implements ImageChooserLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_food);
 
-        mFoodNameEditText = (EditText) findViewById(R.id.food_name_edit_text);
-        mFoodImageView = (ImageView) findViewById(R.id.food_image_view);
-        mAddButton = (Button) findViewById(R.id.add_button);
+        mFoodNameEditText = findViewById(R.id.food_name_edit_text);
+        mFoodImageView = findViewById(R.id.food_image_view);
+        mAddButton = findViewById(R.id.add_button);
 
-        mHelper = new databaseHelper(this);
+        mHelper = new DatabaseHelper(this);
         mDB = mHelper.getWritableDatabase();
 
         mFoodImageView.setOnClickListener(new View.OnClickListener() {
@@ -85,16 +85,20 @@ public class AddFoodActivity extends AppCompatActivity implements ImageChooserLi
                     return;
                 }
 
-                if (isPicturePathEmpty()) {
-                    Toast.makeText(AddFoodActivity.this, "Please select the food picture.", Toast.LENGTH_SHORT).show();
-                    return;
+                if(isPicturePathEmpty()){
+                    mPictucrePath = "default.jpg";
                 }
 
-                ContentValues cv = new ContentValues();
-                cv.put(databaseHelper.COL_NAME, foodName);
-                cv.put(databaseHelper.COL_PICTURE, mPictucrePath);
+                /*if (isPicturePathEmpty()) {
+                    Toast.makeText(AddFoodActivity.this, "Please select the food picture.", Toast.LENGTH_SHORT).show();
+                    return;
+                }*/
 
-                if (mDB.insert(databaseHelper.TABLE_NAME, null, cv) > 0) { // returns the row ID of the newly inserted row, or -1 if an error occurred
+                ContentValues cv = new ContentValues();
+                cv.put(DatabaseHelper.COL_NAME, foodName);
+                cv.put(DatabaseHelper.COL_PICTURE, mPictucrePath);
+
+                if (mDB.insert(DatabaseHelper.TABLE_NAME, null, cv) > 0) { // returns the row ID of the newly inserted row, or -1 if an error occurred
                     Toast.makeText(AddFoodActivity.this, "Food Added.", Toast.LENGTH_SHORT).show();
                     finish();
                 }else Toast.makeText(AddFoodActivity.this, "Add food failed.", Toast.LENGTH_SHORT).show();

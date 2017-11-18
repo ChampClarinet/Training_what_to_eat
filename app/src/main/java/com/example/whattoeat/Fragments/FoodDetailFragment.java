@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.whattoeat.Model.Food;
 import com.example.whattoeat.R;
 import com.example.whattoeat.Utilities.Utils;
 
@@ -21,12 +22,10 @@ import com.example.whattoeat.Utilities.Utils;
 public class FoodDetailFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_FOOD_NAME = "name";
-    private static final String ARG_FOOD_PICTURE = "picture";
+    private static final String ARG_FOOD = "name";
 
     // TODO: Rename and change types of parameters
-    private String mFoodName;
-    private String mFoodPicture;
+    private Food mFood;
 
 
     public FoodDetailFragment() {
@@ -37,16 +36,14 @@ public class FoodDetailFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param name Parameter 1.
-     * @param picture Parameter 2.
+     * @param food Parameter 1.
      * @return A new instance of fragment FoodDetailFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static FoodDetailFragment newInstance(String name, String picture) {
+    public static FoodDetailFragment newInstance(Food food) {
         FoodDetailFragment fragment = new FoodDetailFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_FOOD_NAME, name);
-        args.putString(ARG_FOOD_PICTURE, picture);
+        args.putSerializable(ARG_FOOD, food);
         fragment.setArguments(args);
         return fragment;
     }
@@ -55,8 +52,7 @@ public class FoodDetailFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mFoodName = getArguments().getString(ARG_FOOD_NAME);
-            mFoodPicture = getArguments().getString(ARG_FOOD_PICTURE);
+            mFood = (Food) getArguments().getSerializable(ARG_FOOD);
         }
     }
 
@@ -71,11 +67,11 @@ public class FoodDetailFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        TextView foodNameTextView = (TextView) view.findViewById(R.id.food_detail_text_view);
-        ImageView foodNameImageView = (ImageView) view.findViewById(R.id.food_detail_image_view);
+        TextView foodNameTextView = view.findViewById(R.id.food_detail_text_view);
+        ImageView foodNameImageView = view.findViewById(R.id.food_detail_image_view);
 
-        foodNameTextView.setText(mFoodName);
-        foodNameImageView.setImageDrawable(Utils.getDrawableFromAssets(getActivity(), mFoodPicture));
+        foodNameTextView.setText(mFood.name);
+        foodNameImageView.setImageDrawable(Utils.getDrawableFromAssets(getActivity(), mFood.pictureFileName));
 
     }
 

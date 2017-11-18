@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">วันนี้เราจะกินอะไรดี</string>
+    <string name="title_activity_food_list">รายการอาหาร</string>
+    <string name="add_food">เพิ่มเมนูอาหาร</string>
+    <string name="hint_add_food">ชื่ออาหาร</string>
+    <string name="btn_add">เพิ่ม</string>
+    <string name="btn_random">กินอะไรดี</string>
+    <string name="delete">ลบ</string>
+    <string name="no">ยกเลิก</string>
+    <string name="yes">ลบ</string>
+    <string name="delete_confirm">คุณแน่ใจหรือไม่ที่จะลบ</string>
+    <string name="delete_confirm_title">ยืนยันการลบ</string>
+    <string name="main_activity_text_label">กดรูปเพื่อสุ่ม</string>
+</resources>
