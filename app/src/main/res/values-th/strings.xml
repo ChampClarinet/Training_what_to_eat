@@ -11,5 +11,8 @@
     <string name="yes">ลบ</string>
     <string name="delete_confirm">คุณแน่ใจหรือไม่ที่จะลบ</string>
     <string name="delete_confirm_title">ยืนยันการลบ</string>
-    <string name="main_activity_text_label">กดรูปเพื่อสุ่ม</string>
+    <string name="main_activity_text_label">กดจานเพื่อสุ่ม</string>
+    <string name="deleted">ถูกลบแล้ว</string>
+    <string name="added">ถูกเพิ่มแล้ว</string>
+    <string name="failed">ล้มเหลวในการเพิ่ม</string>
 </resources>

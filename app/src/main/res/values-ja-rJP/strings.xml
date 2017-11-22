@@ -11,5 +11,8 @@
     <string name="yes">はい</string>
     <string name="delete_confirm_title">削除を確認</string>
     <string name="delete_confirm">削除してもよろしいですか？</string>
-    <string name="main_activity_text_label">写真をタブ</string>
+    <string name="main_activity_text_label">お皿にタップ</string>
+    <string name="deleted">が削除されました。</string>
+    <string name="added">が追加されました。</string>
+    <string name="failed">が失敗した。</string>
 </resources>

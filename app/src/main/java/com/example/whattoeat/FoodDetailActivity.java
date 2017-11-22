@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.whattoeat.Adapters.FoodPagerAdapter;
 import com.example.whattoeat.Model.Food;
@@ -76,8 +77,7 @@ public class FoodDetailActivity extends AppCompatActivity {
         if (id == R.id.action_delete_food) {
             FoodMenu menu = FoodMenu.getInstance(this);
             int position = pager.getCurrentItem();
-            Food food = menu.getFoodList().get(position);
-            final int itemId = food.id;
+            final Food food = menu.getFoodList().get(position);
             Log.d(TAG, "deleting " + food.name);
             AlertDialog.Builder dialog = new AlertDialog.Builder(this);
             dialog.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
@@ -89,11 +89,11 @@ public class FoodDetailActivity extends AppCompatActivity {
             dialog.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    delete(itemId);
+                    delete(food);
                 }
             });
             dialog.setTitle(getString(R.string.delete_confirm_title));
-            dialog.setMessage(getString(R.string.delete_confirm)+", "+food.name);
+            dialog.setMessage(getString(R.string.delete_confirm) + ", " + food.name);
             dialog.show();
             return true;
         }
@@ -101,9 +101,10 @@ public class FoodDetailActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void delete(int id) {
+    private void delete(Food food) {
         FoodMenu menu = FoodMenu.getInstance(this);
-        menu.delete(id);
+        menu.delete(food.id);
+        Toast.makeText(this, food.name + getString(R.string.deleted), Toast.LENGTH_SHORT).show();
         finish();
     }
 

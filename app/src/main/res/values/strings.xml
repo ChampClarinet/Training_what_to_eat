@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">What to Eat</string>
+    <string name="app_name">What shall we eat today</string>
     <string name="show_list" translatable="false">SHOW LIST</string>
     <string name="title_activity_food_list">Food List</string>
     <string name="add_food">Add Food</string>
@@ -11,6 +11,9 @@
     <string name="yes">YES</string>
     <string name="delete_confirm">Are you sure to delete?</string>
     <string name="delete_confirm_title">Confirm deletion</string>
-    <string name="main_activity_text_label">Tab picture</string>
+    <string name="main_activity_text_label">Tap the dish!</string>
+    <string name="deleted">has been deleted.</string>
+    <string name="added">has been added.</string>
+    <string name="failed">addition failed.</string>
 
 </resources>
